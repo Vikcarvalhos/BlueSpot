@@ -1,5 +1,5 @@
 // Nav.jsx
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import {Link} from 'react-router-dom';
 import { TiThMenu } from "react-icons/ti";
 import '../css/nav.css';
@@ -9,7 +9,7 @@ import { UserContext } from '../../context/UserContext';
 
 function Nav(){
 
-    const { authToken, setAuthToken, loggedInUser } = useContext(UserContext);
+    const { loggedInUser, setUserId } = useContext(UserContext);
     const [menu, setMenu] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [isRegister, setIsRegister] = useState(true);
@@ -32,7 +32,7 @@ function Nav(){
     }
 
     const handleLogout = () => {
-        setAuthToken(null);
+        setUserId(null);
         alert('Logout realizado com sucesso!');
     }
 
@@ -47,15 +47,15 @@ function Nav(){
                         <div id='menu' className='overlay-content'>
                             
                             <div>
-                                {!authToken && (
+                                {!loggedInUser && (
                                     <>
                                         <p onClick={() => openModal(true)} className='hover-underline'>Cadastro</p>
                                         <p onClick={() => openModal(false)} className='hover-underline'>Login</p>
                                     </>
                                 )}
-                                {authToken && (
+                                {loggedInUser && (
                                     <>
-                                        <p>Olá, {loggedInUser}!</p>
+                                        <p>Olá, {loggedInUser.name}!</p>
                                         <p onClick={handleLogout} className='hover-underline'>Logout</p>
                                     </>
                                 )}

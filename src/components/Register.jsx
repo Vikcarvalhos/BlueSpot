@@ -1,7 +1,7 @@
 // Register.jsx
-import React, { useState, useContext } from 'react'; // Import useContext
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import { UserContext } from '../../context/UserContext'; // Import UserContext
+import { UserContext } from '../../context/UserContext';
 
 function Register() {
     const [username, setUsername] = useState('');
@@ -10,8 +10,7 @@ function Register() {
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
 
-    // Get setAuthToken and setUserId from UserContext
-    const { setAuthToken, setUserId } = useContext(UserContext);
+    const { setUserId } = useContext(UserContext);
 
     const handleRegister = async () => {
         try {
@@ -23,20 +22,15 @@ function Register() {
                 return;
             }
 
-            // Generate a unique ID for the user
             const id = Date.now();
 
             const response = await axios.post('http://localhost:3001/users', { id, username, password, name, phone, email });
             console.log(response.data);
             alert('Registro realizado com sucesso!');
 
-            // Log the user in
-            const loginResponse = await axios.post('http://localhost:3001/users/login', { username, password });
-            const token = loginResponse.data.token;
-
-            // Save the token and user ID to UserContext
-            setAuthToken(token);
+            // Set the user ID in the context and localStorage
             setUserId(id);
+            localStorage.setItem('userId', id);
         } catch (error) {
             console.error(error);
             alert('Ocorreu um erro durante o registro.');

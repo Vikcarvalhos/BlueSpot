@@ -1,13 +1,10 @@
+// UserContext.jsx
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // Importe o axios
+import axios from 'axios';
 
 export const UserContext = React.createContext();
 
 export function UserProvider({ children }) {
-    const [authToken, setAuthToken] = useState(() => {
-        return localStorage.getItem('authToken');
-    });
-
     const [userId, setUserId] = useState(() => {
         return localStorage.getItem('userId');
     });
@@ -15,27 +12,28 @@ export function UserProvider({ children }) {
     const [loggedInUser, setLoggedInUser] = useState(null);
 
     useEffect(() => {
-        if (authToken && userId) {
-            localStorage.setItem('authToken', authToken);
+        if (userId) {
             localStorage.setItem('userId', userId);
 
             // Use o ID do usuário para buscar o usuário
             axios.get(`http://localhost:3001/users/${userId}`)
                 .then(response => {
-                    setLoggedInUser(response.data.name);
+                    setLoggedInUser(response.data);
+                    // Armazenar as informações do usuário no localStorage
+                    localStorage.setItem('user', JSON.stringify(response.data));
                 })
                 .catch(error => {
                     console.error('Erro ao buscar o usuário:', error);
                 });
         } else {
-            localStorage.removeItem('authToken');
             localStorage.removeItem('userId');
+            localStorage.removeItem('user');
             setLoggedInUser(null);
         }
-    }, [authToken, userId]);
+    }, [userId]);
 
     return (
-        <UserContext.Provider value={{ authToken, setAuthToken, userId, setUserId, loggedInUser, setLoggedInUser }}>
+        <UserContext.Provider value={{ userId, setUserId, loggedInUser, setLoggedInUser }}>
             {children}
         </UserContext.Provider>
     );

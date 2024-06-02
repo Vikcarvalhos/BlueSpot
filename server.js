@@ -1,6 +1,5 @@
 // server.js
 import jsonServer from 'json-server';
-import jwt from 'jsonwebtoken';
 
 const server = jsonServer.create();
 const router = jsonServer.router('./src/data/db.json');
@@ -16,21 +15,20 @@ server.post('/users/login', (req, res) => {
     const user = router.db.get('users').find({ username, password }).value();
 
     if (user) {
-        // User found, generate a token and return it
-        const token = jwt.sign({ username: user.username }, 'secret key');
-        res.json({ token });
+        // User found, return the user
+        res.json({ id: user.id, username: user.username });
     } else {
         // User not found, return error
         res.status(401).json({ message: 'Nome de usuário ou senha inválidos.' });
     }
 });
 
-// Adicione esta rota
+// Add this route
 server.get('/users/:id', (req, res) => {
     const user = router.db.get('users').find({ id: Number(req.params.id) }).value();
 
     if (user) {
-        res.json({ name: user.name }); // Retorne apenas o nome do usuário
+        res.json(user); // Return the entire user object
     } else {
         res.status(404).json({ message: 'Usuário não encontrado.' });
     }
