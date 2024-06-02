@@ -31,9 +31,11 @@ function Home(){
     }
 
     const handleReport = () => {
+        const userId = localStorage.getItem('userId');  // Get the userId from localStorage
         const newSpotData = {
             latitude: newSpot.latitude,
             longitude: newSpot.longitude,
+            userId: userId,  // Include the userId in the newSpotData
         };
         fetch('http://localhost:5000/spots', {
             method: 'POST',
