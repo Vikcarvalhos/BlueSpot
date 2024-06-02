@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "id": 1717307594049,
+      "username": "jvcs",
+      "password": "teste",
+      "name": "João Viktor",
+      "phone": "11989541262",
+      "email": "viktor@gmail.com"
+    }
+  ]
+}
