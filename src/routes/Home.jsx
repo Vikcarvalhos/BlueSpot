@@ -32,15 +32,29 @@ function Home(){
 
     const handleReport = () => {
         const newSpotData = {
-            id: Math.max(...spots.map(spot => spot.id)) + 1,
             latitude: newSpot.latitude,
             longitude: newSpot.longitude,
-            users: [],
-            insertedBy: 1
         };
-        setSpots([...spots, newSpotData]);
-        setNewSpot(null);
-        setModalOpen(false);
+        fetch('http://localhost:5000/spots', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newSpotData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === 'Spot adicionado com sucesso') {
+                newSpotData.id = spots.length + 1;
+                newSpotData.users = [];
+                newSpotData.insertedBy = 1;
+                setSpots(prevSpots => [...prevSpots, newSpotData]);
+                setNewSpot(null);
+                setModalOpen(false);
+            } else {
+                alert(data.message);
+            }
+        });
     }
 
     const handleClose = () => {
