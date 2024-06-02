@@ -1,11 +1,11 @@
 # BlueSpot
 
-## Como inicializar
-No terminal da IDE, digite:
+# Como inicializar
+##No terminal da IDE, digite:
 
-npm install
-npm run dev
-Entre no localhost
+###npm install
+###npm run dev
+###Entre no localhost
 
-Abra um novo terminal:
-node server.js
+##Abra um novo terminal:
+###node server.js
