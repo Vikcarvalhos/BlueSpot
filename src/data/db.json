@@ -32,5 +32,11 @@
       "phone": "119898989898",
       "email": "patys@gmail.com"
     }
+  ],
+  "spots": [
+    {"id": 1,"latitude": 52,"longitude": 57, "users":[], "insertedBy": 0},
+    {"id": 2,"latitude": 69,"longitude": 63, "users":[], "insertedBy": 0},
+    {"id": 3,"latitude": 37,"longitude": 94, "users":[], "insertedBy": 0},
+    {"id":4, "latitude": 3, "longitude": 14, "users":[], "insertedBy": 0}
   ]
 }
