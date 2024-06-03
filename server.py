@@ -44,6 +44,24 @@ def is_too_close(spot, spots):
             return True
     return False
 
+@app.route('/spots/<int:spot_id>', methods=['PUT'])
+def update_spot(spot_id):
+    data = request.get_json()
+    userId = data.get('userId')
+    if not userId:
+        return jsonify({'message': 'userId is required'}), 400
+    with open(os.path.join('src', 'data', 'db.json'), 'r') as db_file:
+        db = json.load(db_file)
+    spot = next((spot for spot in db['spots'] if spot['id'] == spot_id), None)
+    if not spot:
+        return jsonify({'message': 'Spot not found'}), 404
+    if userId in spot['users']:
+        return jsonify({'message': 'Você já está participando deste spot'}), 400
+    spot['users'].append(userId)
+    with open(os.path.join('src', 'data', 'db.json'), 'w') as db_file:
+        json.dump(db, db_file)
+    return jsonify({'message': 'Participação adicionada com sucesso'}), 200
+
 @app.route('/spots', methods=['POST'])
 def add_spot():
     data = request.get_json()

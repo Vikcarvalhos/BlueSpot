@@ -59,6 +59,27 @@ function Home(){
         });
     }
 
+    const handleParticipate = () => {
+        const userId = localStorage.getItem('userId');
+        fetch(`http://localhost:5000/spots/${selectedSpot.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ userId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === 'Participação adicionada com sucesso') {
+                setSpots(prevSpots => prevSpots.map(spot => spot.id === selectedSpot.id ? {...spot, users: [...spot.users, userId]} : spot));
+                setSelectedSpot(null);
+                setModalOpen(false);
+            } else {
+                alert(data.message);
+            }
+        });
+    }
+
     const handleClose = () => {
         setModalOpen(false);
         setNewSpot(null);
@@ -94,8 +115,7 @@ function Home(){
                     <div>
                         {selectedSpot && (
                             <>
-                            <button className='spot-options'>Participar</button>
-                            <button className='spot-options'>Organizar</button>
+                            <button className='spot-options' onClick={handleParticipate}>Participar</button>
                             </>
                         )}
                         {newSpot && (
