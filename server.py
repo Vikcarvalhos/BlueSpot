@@ -44,6 +44,15 @@ def is_too_close(spot, spots):
             return True
     return False
 
+@app.route('/users/<int:user_id>', methods=['GET'])
+def get_user(user_id):
+    with open(os.path.join('src', 'data', 'db.json'), 'r') as db_file:
+        db = json.load(db_file)
+    user = next((user for user in db['users'] if user['id'] == user_id), None)
+    if not user:
+        return jsonify({'message': 'User not found'}), 404
+    return jsonify(user), 200
+
 @app.route('/spots/<int:spot_id>', methods=['PUT'])
 def update_spot(spot_id):
     data = request.get_json()

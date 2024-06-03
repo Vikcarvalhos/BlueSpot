@@ -9,11 +9,21 @@ function Home(){
     const [spots, setSpots] = useState(db.spots); // Use the spots data from the db.json file
     const [selectedSpot, setSelectedSpot] = useState(null);
     const [newSpot, setNewSpot] = useState(null);
+    const [userNames, setUserNames] = useState([]); // Add a new state variable for user names
     const mapRef = useRef();
 
-    const handleSpotClick = (item) => {
+    const handleSpotClick = async (item) => { // Make the function async
         setSelectedSpot(item);
         setModalOpen(true);
+
+        // Fetch the names of the users
+        const userNames = [];
+        for (const userId of item.users) {
+            const response = await fetch(`http://localhost:5000/users/${userId}`);
+            const user = await response.json();
+            userNames.push(user.name);
+        }
+        setUserNames(userNames);
     }
 
     const handleMapClick = (event) => {
@@ -97,8 +107,8 @@ function Home(){
                 {spots.map((item, index) => {
                     const spotStyle = {
                         position: 'absolute',
-                        top: `${item.latitude}%`,
-                        left: `${item.longitude}%`,
+                        top: `calc(${item.latitude}% - 50px)`, // Subtract half the height of the image
+                        left: `calc(${item.longitude}% - 25px)`, // Subtract half the width of the image
                         width: '50px',
                         height: '50px',
                         cursor: 'pointer'
@@ -110,7 +120,15 @@ function Home(){
                 <>
                 <div className='modal-backdrop' onClick={handleClose}></div>
                 <div className='modal'>
-                    {selectedSpot && <h2>Escolha uma opção para o ponto {selectedSpot.id}</h2>}
+                    {selectedSpot && (
+                        <>
+                        <h2>Escolha uma opção para o ponto {selectedSpot.id}</h2>
+                        <h3>Participantes:</h3>
+                        <ul>
+                            {userNames.map((name, index) => <li key={index}>{name}</li>)}
+                        </ul>
+                        </>
+                    )}
                     {newSpot && <h2>Adicionar um novo ponto em latitude {newSpot.latitude.toFixed(2)}, longitude {newSpot.longitude.toFixed(2)}?</h2>}
                     <div>
                         {selectedSpot && (
