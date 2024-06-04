@@ -1,16 +1,21 @@
 import React, { useState, useRef } from 'react';
 import { MapInteractionCSS } from 'react-map-interaction';
+import { GrHelp } from "react-icons/gr";
 import '../css/style.css'
-import db from '../data/db.json' // Import the new db.json file
+import db from '../data/db.json'
 import spot from '../assets/spot.png'
 import map from '../assets/map/mapa1.jpg'
 
 function Home(){
     const [modalOpen, setModalOpen] = useState(false);
-    const [spots, setSpots] = useState(db.spots); // Use the spots data from the db.json file
+    const [spots, setSpots] = useState(db.spots);
     const [selectedSpot, setSelectedSpot] = useState(null);
     const [newSpot, setNewSpot] = useState(null);
-    const [userNames, setUserNames] = useState([]); // Add a new state variable for user names
+    const [userNames, setUserNames] = useState([]);
+    const [isDragging, setIsDragging] = useState(false);
+    const [imagePosition, setImagePosition] = useState({ x: 0, y: 0 });
+    const [value, setValue] = useState({ scale: 1, translation: { x: -1000, y: -1000 } });
+    const spotSize = Math.min(50, 50 / value.scale);
     const mapRef = useRef();
 
     const handleSpotClick = async (item) => { // Make the function async
@@ -27,7 +32,20 @@ function Home(){
         setUserNames(userNames);
     }
 
+    const checkImagePosition = () => {
+        const newPosition = mapRef.current.getBoundingClientRect();
+        if (newPosition.x !== imagePosition.x || newPosition.y !== imagePosition.y) {
+            setIsDragging(true);
+        } else {
+            setIsDragging(false);
+        }
+    }
+
     const handleMapClick = (event) => {
+        if (isDragging) {
+            setIsDragging(false); // Reset the flag for the next interaction
+            return;
+        }
         const rect = mapRef.current.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
@@ -38,6 +56,17 @@ function Home(){
         if (!existingSpot) {
             setNewSpot({ latitude, longitude });
             setModalOpen(true);
+        }
+    }
+
+    const handleMouseDown = (event) => {
+        setImagePosition(mapRef.current.getBoundingClientRect());
+    }
+    
+    const handleMouseUp = (event) => {
+        const newPosition = mapRef.current.getBoundingClientRect();
+        if (newPosition.x === imagePosition.x && newPosition.y === imagePosition.y) {
+            handleMapClick(event);
         }
     }
 
@@ -97,23 +126,34 @@ function Home(){
         setSelectedSpot(null);
     }
 
+    const [helpModalOpen, setHelpModalOpen] = useState(false); // Estado para controlar a abertura/fechamento do modal de ajuda
+
+    const handleHelpClick = () => {
+        setHelpModalOpen(true);
+    }
+
+    const handleHelpClose = () => {
+        setHelpModalOpen(false);
+    }
+
     return(
         <>
         <main>
-            <div className='info'>
-                <h1>Encontre um Ponto Próximo de Você</h1>
-            </div>
-            <div className='mapa' onClick={handleMapClick}>
-                <MapInteractionCSS>
-                    <img ref={mapRef} src={map} alt='mapa1' className='map'/>
+            <div className='mapa'>
+            <MapInteractionCSS 
+            onDragStart={() => setImagePosition(mapRef.current.getBoundingClientRect())} 
+            onDragEnd={checkImagePosition}
+            value={value} onChange={(value) => setValue(value)}
+            >
+                <img onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} ref={mapRef} src={map} alt='mapa1' className='map'/>
                 
                     {spots.map((item, index) => {
                         const spotStyle = {
                             position: 'absolute',
-                            top: `calc(${item.latitude}% - 50px)`, // Subtract half the height of the image
-                            left: `calc(${item.longitude}% - 25px)`, // Subtract half the width of the image
-                            width: '50px',
-                            height: '50px',
+                            top: `calc(${item.latitude}% - ${spotSize}px)`, // Subtract half the height of the image
+                            left: `calc(${item.longitude}% - ${spotSize / 2}px)`, // Subtract half the width of the image
+                            width: `${spotSize}px`,
+                            height: `${spotSize}px`,
                             cursor: 'pointer'
                         };
                         return <img key={index} src={spot} alt='spot' style={spotStyle} onClick={(e) => {e.stopPropagation(); handleSpotClick(item);}}/>
@@ -151,9 +191,24 @@ function Home(){
                 </div>
                 </>
             )}
+            <button className="help-button" onClick={handleHelpClick}>
+                <GrHelp />
+            </button>
+
+            {helpModalOpen && (
+                <div>
+                    <div className='modal-backdrop' onClick={handleHelpClose}></div>
+                    <div className='modal'>
+                        <h2>Sobre este projeto</h2>
+                        <p>Este projeto é um mapa interativo que permite aos usuários adicionar e participar de pontos de interesse.</p>
+                        <button onClick={handleHelpClose}>Fechar</button>
+                    </div>
+                </div>
+            )}
         </main>
         </>
     )
 }
 
 export default Home
+

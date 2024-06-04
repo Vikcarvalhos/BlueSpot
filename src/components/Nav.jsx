@@ -1,7 +1,7 @@
 // Nav.jsx
 import React, { useState, useContext } from 'react';
 import {Link} from 'react-router-dom';
-import { TiThMenu } from "react-icons/ti";
+import { CgProfile } from "react-icons/cg";
 import '../css/nav.css';
 import Register from './Register';
 import Login from './Login';
@@ -41,7 +41,7 @@ function Nav(){
             <header>
                 <nav className='nav-menu'>
                     <Link to="/"><img src="" alt="logo"></img></Link>
-                    <button onClick={openNav} className='menu-button'><TiThMenu /></button>
+                    <button onClick={openNav} className='menu-button'><CgProfile /></button>
                     <div className={menu ? 'overlay open' : 'overlay'}>
                     <button className='close-button' onClick={closeNav}>X</button>
                         <div id='menu' className='overlay-content'>

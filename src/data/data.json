@@ -2,9 +2,4 @@
 {"latitude": 69,"longitude": 63,"umidade": 53,"temperatura": 23,"vento": 17},
 {"latitude": 37,"longitude": 94,"umidade": 34.5,"temperatura":17.70000076,"vento": 55},
 {"latitude": 10,"longitude": 28,"umidade": 65.5,"temperatura":17.70000076,"vento": 13},
-{"latitude": 15,"longitude": 54,"umidade": 5.5,"temperatura":30.39999962,"vento": 14},
-{"latitude": 10, "longitude": 20, "umidade": 75, "temperatura": 20.5, "vento": 50},
-{"latitude": 25, "longitude": 35, "umidade": 40, "temperatura": 15.0, "vento": 30},
-{"latitude": 50, "longitude": 60, "umidade": 20, "temperatura": 5.5, "vento": 10},
-{"latitude": 70, "longitude": 80, "umidade": 90, "temperatura": 30.0, "vento": 80},
-{"latitude": 90, "longitude": 100, "umidade": 10, "temperatura": -5.0, "vento": 5}]
+{"latitude": 15,"longitude": 54,"umidade": 5.5,"temperatura":30.39999962,"vento": 14}]

@@ -76,7 +76,7 @@ def add_spot():
     data = request.get_json()
     userId = data.get('userId')
     if not userId:
-        return jsonify({'message': 'userId is required'}), 400
+        return jsonify({'message': 'Você precisa fazer login!'}), 400
     spot = request.get_json()
     print(f'Received data: {spot}')  # Debug line
     with open(os.path.join('src', 'data', 'db.json'), 'r') as db_file:
