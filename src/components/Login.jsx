@@ -27,10 +27,10 @@ function Login() {
     }
 
     return (
-        <div>
-            <input type='text' value={username} onChange={e => setUsername(e.target.value)} placeholder='Username' />
-            <input type='password' value={password} onChange={e => setPassword(e.target.value)} placeholder='Password' />
-            <button onClick={handleLogin}>Login</button>
+        <div className='login-user-content'>
+            <input className='login-user-text' type='text' value={username} onChange={e => setUsername(e.target.value)} placeholder='Username' />
+            <input className='login-user-text' type='password' value={password} onChange={e => setPassword(e.target.value)} placeholder='Password' />
+            <button className='login-user-button' onClick={handleLogin}>Login</button>
         </div>
     )
 }

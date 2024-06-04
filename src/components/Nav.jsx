@@ -2,6 +2,7 @@
 import React, { useState, useContext } from 'react';
 import {Link} from 'react-router-dom';
 import { CgProfile } from "react-icons/cg";
+import { GrClose } from "react-icons/gr";
 import '../css/nav.css';
 import Register from './Register';
 import Login from './Login';
@@ -43,33 +44,34 @@ function Nav(){
                     <Link to="/"><img src="" alt="logo"></img></Link>
                     <button onClick={openNav} className='menu-button'><CgProfile /></button>
                     <div className={menu ? 'overlay open' : 'overlay'}>
-                    <button className='close-button' onClick={closeNav}>X</button>
                         <div id='menu' className='overlay-content'>
-                            
-                            <div>
-                                {!loggedInUser && (
-                                    <>
-                                        <p onClick={() => openModal(true)} className='hover-underline'>Cadastro</p>
-                                        <p onClick={() => openModal(false)} className='hover-underline'>Login</p>
-                                    </>
-                                )}
+                            <div className='user-login'>
                                 {loggedInUser && (
                                     <>
                                         <p>Olá, {loggedInUser.name}!</p>
                                         <p onClick={handleLogout} className='hover-underline'>Logout</p>
                                     </>
                                 )}
+                                {!loggedInUser && (
+                                    <>
+                                        <div className='login'>
+                                            <p onClick={() => openModal(true)} className='hover-underline'>Cadastro</p>
+                                            <p onClick={() => openModal(false)} className='hover-underline'>Login</p>
+                                        </div>
+                                    </>
+                                )}
                             </div>
-                            
+                            <div className='close-button-container'>
+                                <button className='close-button' onClick={closeNav}><GrClose /></button>
+                            </div>
                         </div>
                     </div>
                 </nav>
             </header>
             {modalOpen && (
                 <>
-                <div className='modal-background'></div>
+                <div className='modal-background' onClick={closeModal}></div>
                 <div className='modal'>
-                    <button onClick={closeModal}>X</button>
                     {isRegister ? <Register closeModal={closeModal} /> : <Login closeModal={closeModal} />}
                 </div>
                 </>

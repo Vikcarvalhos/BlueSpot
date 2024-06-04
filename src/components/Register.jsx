@@ -38,14 +38,14 @@ function Register() {
     }
 
     return (
-        <div>
-            <input type='text' value={name} onChange={e => setName(e.target.value)} placeholder='Nome' />
-            <input type='text' value={username} onChange={e => setUsername(e.target.value)} placeholder='Username' />
-            <input type='password' value={password} onChange={e => setPassword(e.target.value)} placeholder='Password' />
-            <input type='text' value={phone} onChange={e => setPhone(e.target.value)} placeholder='Telefone' />
-            <input type='email' value={email} onChange={e => setEmail(e.target.value)} placeholder='Email' />
-            <button onClick={handleRegister}>Register</button>
-        </div>
+        <div className='register-user-content'>
+        <input className='register-user-text' type='text' value={name} onChange={e => setName(e.target.value)} placeholder='Nome' />
+        <input className='register-user-text' type='text' value={username} onChange={e => setUsername(e.target.value)} placeholder='Username' />
+        <input className='register-user-text' type='password' value={password} onChange={e => setPassword(e.target.value)} placeholder='Password' />
+        <input className='register-user-text' type='text' value={phone} onChange={e => setPhone(e.target.value)} placeholder='Telefone' />
+        <input className='register-user-text' type='email' value={email} onChange={e => setEmail(e.target.value)} placeholder='Email' />
+        <button className='register-user-button' onClick={handleRegister}>Register</button>
+    </div>
     )
 }
 
