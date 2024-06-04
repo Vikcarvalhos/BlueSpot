@@ -55,6 +55,7 @@
 
     #menu p:hover {
         color: #FF7D00;
+        cursor: pointer;
     }
 
     .menu-button{

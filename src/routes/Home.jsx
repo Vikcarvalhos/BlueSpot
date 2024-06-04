@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { MapInteractionCSS } from 'react-map-interaction';
 import '../css/style.css'
 import db from '../data/db.json' // Import the new db.json file
 import spot from '../assets/spot.png'
@@ -103,18 +104,21 @@ function Home(){
                 <h1>Encontre um Ponto Próximo de Você</h1>
             </div>
             <div className='mapa' onClick={handleMapClick}>
-                <img ref={mapRef} src={map} alt='mapa1' className='map'/>
-                {spots.map((item, index) => {
-                    const spotStyle = {
-                        position: 'absolute',
-                        top: `calc(${item.latitude}% - 50px)`, // Subtract half the height of the image
-                        left: `calc(${item.longitude}% - 25px)`, // Subtract half the width of the image
-                        width: '50px',
-                        height: '50px',
-                        cursor: 'pointer'
-                    };
-                    return <img key={index} src={spot} alt='spot' style={spotStyle} onClick={(e) => {e.stopPropagation(); handleSpotClick(item);}}/>
-                })}
+                <MapInteractionCSS>
+                    <img ref={mapRef} src={map} alt='mapa1' className='map'/>
+                
+                    {spots.map((item, index) => {
+                        const spotStyle = {
+                            position: 'absolute',
+                            top: `calc(${item.latitude}% - 50px)`, // Subtract half the height of the image
+                            left: `calc(${item.longitude}% - 25px)`, // Subtract half the width of the image
+                            width: '50px',
+                            height: '50px',
+                            cursor: 'pointer'
+                        };
+                        return <img key={index} src={spot} alt='spot' style={spotStyle} onClick={(e) => {e.stopPropagation(); handleSpotClick(item);}}/>
+                    })}
+                </MapInteractionCSS>
             </div>
             {modalOpen && (
                 <>
