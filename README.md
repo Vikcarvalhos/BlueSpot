@@ -21,7 +21,7 @@ Além disso, utilizamos os dados coletados para prever locais que podem ter acú
 
 - Node.js
 - npm (Node Package Manager)
-- Python 3.x
+- Python 3.12
 - pip (Python Package Installer)
 - Mosquitto MQTT
 - Node-RED
@@ -40,41 +40,30 @@ A aplicação ESP32 é responsável por coletar dados de sensores.
 
 2. **Configuração do Node-RED:**
     - Instale o Node-RED seguindo as instruções em: https://nodered.org/docs/getting-started/local
-    - Configure um fluxo para receber os dados do ESP32 via MQTT e enviá-los para um arquivo `data.json`.
+    - Importe o fluxo no NODE-RED para receber os dados do ESP32 via MQTT e enviá-los para um arquivo `data.json`.
 
 3. **Configuração do Mosquitto MQTT:**
     - Instale o Mosquitto MQTT seguindo as instruções em: https://mosquitto.org/download/
-    - Configure o Mosquitto para funcionar como broker MQTT para receber os dados do ESP32.
 
 #### 2. Aplicação Python
 
 A aplicação Python trata os dados recebidos do ESP32 e os armazena.
 
 1. **Configuração do Ambiente Python:**
-    - Crie um ambiente virtual:
-      ```bash
-      python -m venv venv
-      ```
-    - Ative o ambiente virtual:
-      - No Windows:
-        ```bash
-        venv\Scripts\activate
-        ```
-      - No macOS/Linux:
-        ```bash
-        source venv/bin/activate
-        ```
+    - Instale a ultima versão do Python (v3.12)
 
 2. **Instalação das Dependências:**
+    - Dentro da pasta BlueSpot, localize o arquivo requirements.txt.
+    - Inicie um terminal e execute o comando:
     ```bash
     pip install -r requirements.txt
     ```
     - Certifique-se de que o arquivo `requirements.txt` inclua `Flask`, `Flask-CORS` e outras bibliotecas necessárias.
 
-3. **Iniciando a Aplicação:**
+4. **Iniciando a Aplicação:**
     - Execute o script principal:
       ```bash
-      python app.py
+      python server.py
       ```
     - A aplicação irá tratar os dados recebidos e armazená-los em `db.json`.
 
@@ -85,7 +74,7 @@ A aplicação web exibe informações e permite a interação do usuário.
 1. **Configuração do Ambiente Node:**
     - Navegue até o diretório do projeto React:
       ```bash
-      cd webapp
+      cd BlueSpot
       ```
     - Instale as dependências:
       ```bash
@@ -93,13 +82,13 @@ A aplicação web exibe informações e permite a interação do usuário.
       ```
 
 2. **Iniciando a Aplicação:**
+    - Inicie a aplicação React:
+      ```bash
+      npm run dev
+      ```
     - Inicie o servidor Node:
       ```bash
       node server.js
-      ```
-    - Inicie a aplicação React:
-      ```bash
-      npm start
       ```
 
 A aplicação estará disponível em `http://localhost:3000`.
