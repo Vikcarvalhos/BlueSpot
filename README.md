@@ -2,7 +2,10 @@
 
 ## Descrição
 
-BlueSpot é uma aplicação web projetada para facilitar a organização de mutirões de coleta e reciclagem de lixo. Nossa plataforma permite que os usuários se conectem e sinalizem locais que possuem acúmulo de lixo. Esses pontos sinalizados podem ser utilizados para organizar mutirões de coleta, ajudando aqueles que desejam se engajar em projetos sociais a encontrar locais próximos ou a sinalizar novos pontos de coleta.
+BlueSpot é uma aplicação web projetada para facilitar a organização de mutirões de coleta e reciclagem de lixo. 
+
+Nossa plataforma permite que os usuários se conectem e sinalizem locais que possuem acúmulo de lixo. 
+Esses pontos sinalizados podem ser utilizados para organizar mutirões de coleta, ajudando aqueles que desejam se engajar em projetos sociais a encontrar locais próximos ou a sinalizar novos pontos de coleta.
 
 Além disso, utilizamos os dados coletados para prever locais que podem ter acúmulo de lixo devido a eventos naturais (como vento ou chuva) ou não naturais (como descarte por conveniência). Nosso objetivo é criar uma rede colaborativa para combater a poluição e promover a reciclagem de maneira eficiente.
 
