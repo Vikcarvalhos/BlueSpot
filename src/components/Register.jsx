@@ -24,7 +24,11 @@ function Register() {
 
             const id = Date.now();
 
-            const response = await axios.post('http://localhost:3001/users', { id, username, password, name, phone, email });
+            const response = await axios.post('http://localhost:3001/users', { id, username, password, name, phone, email }, {
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8'
+                }
+            });
             console.log(response.data);
             alert('Registro realizado com sucesso!');
 

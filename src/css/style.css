@@ -13,57 +13,444 @@ main{
     align-items: center;
 }
 
-.mapa {
-    position: relative;
-    width: 100vw;
-    height: auto;
-}
-
-.map{
-    width: 300vw;
-}
-
-.modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    z-index: 1000;
-}
-
-.modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-}
-
-.help-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: white;
-    color: rgb(0, 26, 255);
-    width: 5rem;
-    height: 5rem;
-    border-radius: 3vw 3vw 1vw 3vw;
-    border: 1px solid #E6E6E6;
-    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-@media (max-width: 768px) {
-    .help-button {
-        display: none;
+@media (min-width: 1200px){
+    .mapa {
+        position: relative;
+        width: 100vw;
+        height: auto;
     }
+    
+    .map{
+        width: 200vw;
+    }
+    
+    li {
+        list-style-type: none;
+    }
+    
+    .modal {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: fixed;
+        top: 10vw; /* Centralize verticalmente com 10% no topo e no fundo */
+        bottom: 10vw;
+        left: 0; /* Alinhe à esquerda */
+        transform: none; /* Remova a transformação existente */
+        background-color: white;
+        width: 35vw;
+        padding: 20px;
+        border-radius: 0 20px 50px 0;
+        z-index: 1000;
+        overflow: auto; /* Adicione rolagem se o conteúdo for muito longo */
+    }
+    
+    .modal-backdrop {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    
+    .help-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: white;
+        color: rgb(0, 26, 255);
+        width: 5rem;
+        height: 5rem;
+        border-radius: 3vw 3vw 1vw 3vw;
+        border: 1px solid #E6E6E6;
+        box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .modal-image{
+        width: 60vw;
+    }
+    
+    .spot-options-container{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    
+    .spot-options{
+        padding: 1rem 1.5rem;
+        background-color: #00869F;
+        color: white;
+        border: none;
+        border-radius: 1rem;
+        cursor: pointer;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+    main{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .mapa {
+        position: relative;
+        width: 100vw;
+        height: auto;
+    }
+    
+    .map{
+        width: 200vw;
+    }
+    
+    li {
+        list-style-type: none;
+    }
+    
+    .modal {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: fixed;
+        top: 10vw; /* Centralize verticalmente com 10% no topo e no fundo */
+        bottom: 10vw;
+        left: 0; /* Alinhe à esquerda */
+        transform: none; /* Remova a transformação existente */
+        background-color: white;
+        width: 35vw;
+        padding: 20px;
+        border-radius: 0 20px 50px 0;
+        z-index: 1000;
+        overflow: auto; /* Adicione rolagem se o conteúdo for muito longo */
+    }
+    
+    .modal-backdrop {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    
+    .help-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: white;
+        color: rgb(0, 26, 255);
+        width: 5rem;
+        height: 5rem;
+        border-radius: 3vw 3vw 1vw 3vw;
+        border: 1px solid #E6E6E6;
+        box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .modal-image{
+        width: 60vw;
+    }
+    
+    .spot-options-container{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    
+    .spot-options{
+        padding: 1rem 1.5rem;
+        background-color: #00869F;
+        color: white;
+        border: none;
+        border-radius: 1rem;
+        cursor: pointer;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 992px)  {
+    main{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .mapa {
+        position: relative;
+        width: 100vw;
+        height: auto;
+    }
+    
+    .map{
+        width: 200vw;
+    }
+    
+    li {
+        list-style-type: none;
+    }
+    
+    .modal {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: fixed;
+        top: 10vw; /* Centralize verticalmente com 10% no topo e no fundo */
+        bottom: 10vw;
+        left: 0; /* Alinhe à esquerda */
+        transform: none; /* Remova a transformação existente */
+        background-color: white;
+        width: 35vw;
+        padding: 20px;
+        border-radius: 0 20px 50px 0;
+        z-index: 1000;
+        overflow: auto; /* Adicione rolagem se o conteúdo for muito longo */
+    }
+    
+    .modal-backdrop {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    
+    .help-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: white;
+        color: rgb(0, 26, 255);
+        width: 5rem;
+        height: 5rem;
+        border-radius: 3vw 3vw 1vw 3vw;
+        border: 1px solid #E6E6E6;
+        box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .modal-image{
+        width: 60vw;
+    }
+    
+    .spot-options-container{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    
+    .spot-options{
+        padding: 1rem 1.5rem;
+        background-color: #00869F;
+        color: white;
+        border: none;
+        border-radius: 1rem;
+        cursor: pointer;
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 768px) {
+    
+    main{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .mapa {
+        position: relative;
+        width: 100vw;
+        height: auto;
+    }
+    
+    .map{
+        width: 200vw;
+    }
+    
+    li {
+        list-style-type: none;
+    }
+    
+    .modal {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        transform: none;
+        background-color: white;
+        width: 100%;
+        padding: 20px;
+        border-radius: 20px 20px 0 0;
+        z-index: 1000;
+        overflow: auto;
+    }
+    
+    .modal-backdrop {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    
+    .help-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: white;
+        color: rgb(0, 26, 255);
+        width: 5rem;
+        height: 5rem;
+        border-radius: 3vw 3vw 1vw 3vw;
+        border: 1px solid #E6E6E6;
+        box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .modal-image{
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5vh;
+        height: 30vw;
+    }
+    
+    .spot-options-container{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    
+    .spot-options{
+        padding: 1rem 1.5rem;
+        background-color: #00869F;
+        color: white;
+        border: none;
+        border-radius: 1rem;
+        cursor: pointer;
+    }
+}
+
+@media (max-width: 576px) {
+    
+    main{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .mapa {
+        position: relative;
+        width: 100vw;
+        height: auto;
+    }
+    
+    .map{
+        width: 200vw;
+    }
+    
+    li {
+        list-style-type: none;
+    }
+    
+    .modal {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        transform: none;
+        background-color: white;
+        width: 100%;
+        padding: 20px;
+        border-radius: 20px 20px 0 0;
+        z-index: 1000;
+        overflow: auto;
+    }
+    
+    .modal-backdrop {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    
+    .help-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: white;
+        color: rgb(0, 26, 255);
+        width: 5rem;
+        height: 5rem;
+        border-radius: 3vw 3vw 1vw 3vw;
+        border: 1px solid #E6E6E6;
+        box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .modal-image{
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5vh;
+        height: 35vh;
+    }
+    
+    .spot-options-container{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    
+    .spot-options{
+        padding: 1rem 1.5rem;
+        background-color: #00869F;
+        color: white;
+        border: none;
+        border-radius: 1rem;
+        cursor: pointer;
+    }
+    
 }

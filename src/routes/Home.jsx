@@ -1,10 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MapInteractionCSS } from 'react-map-interaction';
 import { GrHelp } from "react-icons/gr";
 import '../css/style.css'
 import db from '../data/db.json'
 import spot from '../assets/spot.png'
 import map from '../assets/map/mapa1.jpg'
+import coletores from '../assets/Participar.svg'
+import reportar from '../assets/Reportar.svg'
 
 function Home(){
     const [modalOpen, setModalOpen] = useState(false);
@@ -14,9 +16,44 @@ function Home(){
     const [userNames, setUserNames] = useState([]);
     const [isDragging, setIsDragging] = useState(false);
     const [imagePosition, setImagePosition] = useState({ x: 0, y: 0 });
-    const [value, setValue] = useState({ scale: 1, translation: { x: -1000, y: -1000 } });
-    const spotSize = Math.min(50, 50 / value.scale);
+    const [value, setValue] = useState({ scale: 1, translation: { x: -100, y: -100 } });
+    const [spotSize, setSpotSize] = useState(50);
     const mapRef = useRef();
+
+    // Listen for window resize events
+    useEffect(() => {
+        const handleResize = () => {
+            const width = window.innerWidth;
+
+            if (width <= 576) {
+                setValue({ scale: 1.5, translation: { x: -400, y: -50 } });
+                setSpotSize(25); // Update spot size
+            } else if (width <= 768) {
+                setValue({ scale: 1, translation: { x: -300, y: -70 } });
+                setSpotSize(40); // Update spot size
+            } else if (width <= 992) {
+                setValue({ scale: 0.8, translation: { x: -80, y: -80 } });
+                setSpotSize(45); // Update spot size
+            } else if (width <= 1200) {
+                setValue({ scale: 0.9, translation: { x: -90, y: -90 } });
+                setSpotSize(50); // Update spot size
+            } else {
+                setValue({ scale: 1, translation: { x: -100, y: -100 } });
+                setSpotSize(50); // Update spot size
+            }
+        };
+
+        // Initial resize
+        handleResize();
+
+        // Add event listener
+        window.addEventListener('resize', handleResize);
+
+        // Cleanup
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     const handleSpotClick = async (item) => { // Make the function async
         setSelectedSpot(item);
@@ -141,53 +178,85 @@ function Home(){
         <main>
             <div className='mapa'>
             <MapInteractionCSS 
-            onDragStart={() => setImagePosition(mapRef.current.getBoundingClientRect())} 
-            onDragEnd={checkImagePosition}
-            value={value} onChange={(value) => setValue(value)}
+                onDragStart={() => setImagePosition(mapRef.current.getBoundingClientRect())} 
+                onDragEnd={checkImagePosition}
+                value={value} onChange={(value) => setValue(value)}
             >
-                <img onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} ref={mapRef} src={map} alt='mapa1' className='map'/>
-                
-                    {spots.map((item, index) => {
-                        const spotStyle = {
-                            position: 'absolute',
-                            top: `calc(${item.latitude}% - ${spotSize}px)`, // Subtract half the height of the image
-                            left: `calc(${item.longitude}% - ${spotSize / 2}px)`, // Subtract half the width of the image
-                            width: `${spotSize}px`,
-                            height: `${spotSize}px`,
-                            cursor: 'pointer'
-                        };
-                        return <img key={index} src={spot} alt='spot' style={spotStyle} onClick={(e) => {e.stopPropagation(); handleSpotClick(item);}}/>
+                <img 
+                    onMouseDown={handleMouseDown} 
+                    onMouseUp={handleMouseUp} 
+                    onTouchStart={handleMouseDown} 
+                    onTouchEnd={handleMouseUp} 
+                    ref={mapRef} 
+                    src={map} 
+                    alt='mapa1' 
+                    className='map'
+                />
+                {spots.map((item, index) => {
+                    const spotStyle = {
+                        position: 'absolute',
+                        top: `calc(${item.latitude}% - ${spotSize}px)`, // Subtract half the height of the image
+                        left: `calc(${item.longitude}% - ${spotSize / 2}px)`, // Subtract half the width of the image
+                        width: `${spotSize}px`,
+                        height: `${spotSize}px`,
+                        cursor: 'pointer'
+                    };
+                        return (
+                            <img 
+                                key={index} 
+                                src={spot} 
+                                alt='spot' 
+                                style={spotStyle} 
+                                onClick={(e) => {e.stopPropagation(); handleSpotClick(item);}}
+                                onTouchEnd={(e) => {e.stopPropagation(); handleSpotClick(item);}}
+                            />
+                        )
                     })}
                 </MapInteractionCSS>
             </div>
             {modalOpen && (
                 <>
-                <div className='modal-backdrop' onClick={handleClose}></div>
+                {selectedSpot && (
+                    <div className='modal-backdrop' onClick={handleClose}>
+                        <img src={coletores} alt='coletores' className='modal-image'/>
+                    </div>
+                )}
+                {newSpot && (
+                    <div className='modal-backdrop' onClick={handleClose}>
+                        <img src={reportar} alt='procurando lixo' className='modal-image'/>
+                    </div>
+                )}
                 <div className='modal'>
                     {selectedSpot && (
                         <>
-                        <h2>Escolha uma opção para o ponto {selectedSpot.id}</h2>
-                        <h3>Participantes:</h3>
+                        <div>
+                            <h2>Junte-se ao mutirão!</h2>
+                            <h3>Parcipantes:</h3>
+                        </div>
                         <ul>
                             {userNames.map((name, index) => <li key={index}>{name}</li>)}
                         </ul>
                         </>
                     )}
-                    {newSpot && <h2>Adicionar um novo ponto em latitude {newSpot.latitude.toFixed(2)}, longitude {newSpot.longitude.toFixed(2)}?</h2>}
-                    <div>
+                    {newSpot && <h2>Encontrou lixo acumulado?</h2>}
+                    <div className='modal-button-container'>
                         {selectedSpot && (
                             <>
-                            <button className='spot-options' onClick={handleParticipate}>Participar</button>
+                            <div className='spot-options-container'>
+                                <button className='spot-options' onClick={handleParticipate}>Participar</button>
+                                <button className='spot-options' onClick={handleClose}>Cancelar</button>
+                            </div>
                             </>
                         )}
                         {newSpot && (
                             <>
-                            <button className='spot-options' onClick={handleReport}>Reportar</button>
-                            <button className='spot-options'>Cancelar</button>
+                            <div className='spot-options-container'>
+                                <button className='spot-options' onClick={handleReport}>Reportar</button>
+                                <button className='spot-options' onClick={handleClose}>Cancelar</button>
+                            </div>
                             </>
                         )}
                     </div>
-                    <button onClick={handleClose}>Close</button>
                 </div>
                 </>
             )}
@@ -200,7 +269,12 @@ function Home(){
                     <div className='modal-backdrop' onClick={handleHelpClose}></div>
                     <div className='modal'>
                         <h2>Sobre este projeto</h2>
-                        <p>Este projeto é um mapa interativo que permite aos usuários adicionar e participar de pontos de interesse.</p>
+                        <p>
+                            Este projeto é um mapa interativo que tem como objetivo reduzir a quantidade de lixo
+                            que pode afetar a vida marinha. Aqui, você irá visualizar locais com acumulo
+                            de lixo reportador por usuários ou gerados apartir de nossa análise de dados.
+                            Crie grupos de mutirão para limpeza desses locais e ajude a preservar o meio ambiente.
+                        </p>
                         <button onClick={handleHelpClose}>Fechar</button>
                     </div>
                 </div>

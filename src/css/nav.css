@@ -15,7 +15,11 @@
         color: white;
         font-family: "Roboto", sans-serif;
         text-transform: uppercase;
-        padding: 10px 5vw;
+        padding: 0px 5vw;
+    }
+
+    .logo {
+        width: 15vh;
     }
 
     .nav-menu {
@@ -31,16 +35,6 @@
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
-    }
-
-    #menu a {
-        color: black;
-        text-decoration: none;
-        margin: 0 10px;
-    }
-
-    #menu a:hover {
-        color: #F00013;
     }
 
     .login{
@@ -149,6 +143,10 @@
         right: -50%;
     }
 
+    .user-login p{
+        color: black;
+    }
+
     .login-user-content{
         display: flex;
         flex-direction: column;
@@ -161,7 +159,7 @@
         width: 30vw;
         border-radius: 10px;
         border: none;
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     }
 
     .login-user-button{
@@ -170,7 +168,7 @@
         border: none;
         background-color: #00869F;
         color: white;
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     
     }
 
@@ -186,7 +184,7 @@
         width: 30vw;
         border-radius: 10px;
         border: none;
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     }
     
     .register-user-button{
@@ -195,7 +193,7 @@
         border: none;
         background-color: #00869F;
         color: white;
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     }
 }
 
@@ -208,6 +206,10 @@
         font-family: "Roboto", sans-serif;
         text-transform: uppercase;
         padding: 10px 5vw;
+    }
+
+    .logo {
+        width: 15vh;
     }
 
     .nav-menu {
@@ -279,18 +281,6 @@
         text-align: center;
     }
     
-    .overlay-content a {
-        display: block;
-        color: black;
-        text-decoration: none;
-        margin: 10px 0;
-        font-size: 18px;
-    }
-    
-    .overlay-content a:hover {
-        color: #ff7f50;
-    }
-    
     .modal {
         position: fixed;
         top: 50%;
@@ -310,5 +300,58 @@
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
         z-index: 999;
+    }
+
+    .user-login p{
+        color: black;
+    }
+
+    .login-user-content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .login-user-text{
+        padding: 1rem;
+        width: 30vw;
+        border-radius: 10px;
+        border: none;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    }
+
+    .login-user-button{
+        padding: 1rem;
+        border-radius: 10px;
+        border: none;
+        background-color: #00869F;
+        color: white;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    
+    }
+
+    .register-user-content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+    }
+    
+    .register-user-text{
+        padding: 1rem;
+        width: 30vw;
+        border-radius: 10px;
+        border: none;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    }
+    
+    .register-user-button{
+        padding: 1rem;
+        border-radius: 10px;
+        border: none;
+        background-color: #00869F;
+        color: white;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     }
 }

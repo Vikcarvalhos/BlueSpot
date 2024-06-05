@@ -7,6 +7,7 @@ import '../css/nav.css';
 import Register from './Register';
 import Login from './Login';
 import { UserContext } from '../../context/UserContext';
+import logo from '../assets/Bluespot.svg'
 
 function Nav(){
 
@@ -41,7 +42,7 @@ function Nav(){
         <>
             <header>
                 <nav className='nav-menu'>
-                    <Link to="/"><img src="" alt="logo"></img></Link>
+                    <Link to="/"><img src={logo} alt="logo" className="logo"></img></Link>
                     <button onClick={openNav} className='menu-button'><CgProfile /></button>
                     <div className={menu ? 'overlay open' : 'overlay'}>
                         <div id='menu' className='overlay-content'>

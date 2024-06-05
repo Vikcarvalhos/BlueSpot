@@ -9,7 +9,6 @@ function App() {
     <UserProvider> {/* Use UserProvider aqui */}
       <Nav/>
       <Outlet/>
-      <Footer/>
     </UserProvider>
   );
 }
