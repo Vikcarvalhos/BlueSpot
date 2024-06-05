@@ -47,6 +47,10 @@ A aplicação ESP32 é responsável por coletar dados de sensores.
 3. **Configuração do Mosquitto MQTT:**
     - Instale o Mosquitto MQTT seguindo as instruções em: https://mosquitto.org/download/
 
+4. **Iniciando a Aplicação:**
+    - Inicie a aplicação do Wokwi
+    - Inicie o fluxo do NODE-RED
+    
 #### 2. Aplicação Python
 
 A aplicação Python trata os dados recebidos do ESP32 e os armazena.
