@@ -1,0 +1,173 @@
+[
+    {
+        "id": "6948951f7dc31ce9",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4f92ddbf6ad6bfd2",
+        "type": "file",
+        "z": "6948951f7dc31ce9",
+        "name": "Write Data Json",
+        "filename": "C:\\Users\\vikto\\OneDrive\\Área de Trabalho\\BlueSpot\\data.json",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 980,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b22552a4b6f2c894",
+        "type": "mqtt in",
+        "z": "6948951f7dc31ce9",
+        "name": "",
+        "topic": "topic/gsesp32",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "85c3849d.01d1d",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 210,
+        "y": 160,
+        "wires": [
+            [
+                "5f45459d3b3047dc"
+            ]
+        ]
+    },
+    {
+        "id": "c0d502ab59632da5",
+        "type": "file in",
+        "z": "6948951f7dc31ce9",
+        "name": "Read Data Json",
+        "filename": "C:\\Users\\vikto\\OneDrive\\Área de Trabalho\\BlueSpot\\data.json",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 720,
+        "y": 200,
+        "wires": [
+            [
+                "060350a8061531ea"
+            ]
+        ]
+    },
+    {
+        "id": "06855af7e586671c",
+        "type": "debug",
+        "z": "6948951f7dc31ce9",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "060350a8061531ea",
+        "type": "function",
+        "z": "6948951f7dc31ce9",
+        "name": "Manage JSON Array",
+        "func": "if (msg.hasOwnProperty(\"payload\")) {\n    let data = msg.payload;\n    console.log(\"Payload inicial:\", data);\n\n    if (data instanceof Buffer) {\n        // Se os dados forem um buffer, converta para string\n        data = data.toString();\n        console.log(\"Payload convertido de Buffer para string:\", data);\n    }\n\n    try {\n        // Tenta fazer o parse do conteúdo do arquivo para um array JSON\n        const existingArray = JSON.parse(data);\n        console.log(\"Array existente após parse:\", existingArray);\n\n        // Certifique-se de que msg.originalPayload seja um objeto JSON\n        let originalPayload;\n        try {\n            originalPayload = JSON.parse(msg.originalPayload);\n        } catch (e) {\n            originalPayload = msg.originalPayload;\n        }\n\n        // Adiciona o JSON recebido ao array existente\n        existingArray.push(originalPayload);\n        msg.payload = JSON.stringify(existingArray);\n        console.log(\"Novo payload após adicionar originalPayload:\", msg.payload);\n    } catch (error) {\n        // Se houver um erro ao fazer o parse do conteúdo do arquivo, cria um novo array com o JSON recebido\n        console.log(\"Erro ao fazer o parse de data:\", error);\n        let originalPayload;\n        try {\n            originalPayload = JSON.parse(msg.originalPayload);\n        } catch (e) {\n            originalPayload = msg.originalPayload;\n        }\n        msg.payload = JSON.stringify([originalPayload]);\n        console.log(\"Novo payload após erro no parse:\", msg.payload);\n    }\n} else {\n    console.log(\"Propriedade 'payload' não encontrada em msg\");\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 160,
+        "wires": [
+            [
+                "4f92ddbf6ad6bfd2",
+                "773158b325a977ce"
+            ]
+        ]
+    },
+    {
+        "id": "773158b325a977ce",
+        "type": "debug",
+        "z": "6948951f7dc31ce9",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "5f45459d3b3047dc",
+        "type": "function",
+        "z": "6948951f7dc31ce9",
+        "name": "Convert MQTT Message",
+        "func": "msg.originalPayload = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 160,
+        "wires": [
+            [
+                "06855af7e586671c",
+                "060350a8061531ea",
+                "c0d502ab59632da5"
+            ]
+        ]
+    },
+    {
+        "id": "85c3849d.01d1d",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": null,
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": null,
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": null,
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
