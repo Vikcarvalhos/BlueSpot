@@ -30,7 +30,7 @@ Além disso, utilizamos os dados coletados para prever locais que podem ter acú
 - Node-RED
 - Wokwi (para simulação do ESP32)
 
-### Passos para Instalação
+### Passos para Executar
 
 #### 1. Aplicação ESP32
 
