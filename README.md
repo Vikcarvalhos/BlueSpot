@@ -34,8 +34,8 @@ Além disso, utilizamos os dados coletados para prever locais que podem ter acú
 A aplicação ESP32 é responsável por coletar dados de sensores.
 
 1. **Configuração do Wokwi:**
-    - Crie um projeto no Wokwi para simular o ESP32.
-    - Adicione os componentes necessários ao seu projeto (sensores, etc).
+    - Navegue até a pasta ./BlueSpot/BlueSpot Edge/
+    - Abra o link do arquivo wokwi-project.txt
     - Utilize o código fornecido para configurar o ESP32 e coletar dados dos sensores.
 
 2. **Configuração do Node-RED:**
@@ -53,14 +53,17 @@ A aplicação Python trata os dados recebidos do ESP32 e os armazena.
     - Instale a ultima versão do Python (v3.12)
 
 2. **Instalação das Dependências:**
-    - Dentro da pasta BlueSpot, localize o arquivo requirements.txt.
+    - Navegue até o diretório do projeto:
+      ```bash
+      cd BlueSpot
+      ```
     - Inicie um terminal e execute o comando:
-    ```bash
-    pip install -r requirements.txt
-    ```
+      ```bash
+      pip install -r requirements.txt
+      ```
     - Certifique-se de que o arquivo `requirements.txt` inclua `Flask`, `Flask-CORS` e outras bibliotecas necessárias.
 
-4. **Iniciando a Aplicação:**
+3. **Iniciando a Aplicação:**
     - Execute o script principal:
       ```bash
       python server.py
