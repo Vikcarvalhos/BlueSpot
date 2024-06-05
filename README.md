@@ -37,8 +37,7 @@ Além disso, utilizamos os dados coletados para prever locais que podem ter acú
 A aplicação ESP32 é responsável por coletar dados de sensores.
 
 1. **Configuração do Wokwi:**
-    - Navegue até a pasta ./BlueSpot/BlueSpot Edge/
-    - Abra o link do arquivo wokwi-project.txt
+    - Abra o link https://wokwi.com/projects/399175724003566593
     - Utilize o código fornecido para configurar o ESP32 e coletar dados dos sensores.
 
 2. **Configuração do Node-RED:**
