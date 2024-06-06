@@ -42,7 +42,8 @@ A aplicação ESP32 é responsável por coletar dados de sensores.
 
 2. **Configuração do Node-RED:**
     - Instale o Node-RED seguindo as instruções em: https://nodered.org/docs/getting-started/local
-    - Importe o fluxo no NODE-RED para receber os dados do ESP32 via MQTT e enviá-los para um arquivo `data.json`.
+    - Abra a pasta do projeto e importe o fluxo no NODE-RED para receber os dados do ESP32 via MQTT e enviá-los para um arquivo `data.json`.
+    - Em `Write Data Json`, escreva o caminho para o arquivo data.json. Exemplo: `C:\Users\`user`\BlueSpot\src\data\data.json`
 
 3. **Configuração do Mosquitto MQTT:**
     - Instale o Mosquitto MQTT seguindo as instruções em: https://mosquitto.org/download/
@@ -63,7 +64,10 @@ A aplicação Python trata os dados recebidos do ESP32 e os armazena.
       ```bash
       cd BlueSpot
       ```
-    - Inicie um terminal e execute o comando:
+    - Inicie um terminal e execute os comandos:
+      ```bash
+      setx PATH "%PATH%;C:\Python312\Scripts"
+      ```
       ```bash
       pip install -r requirements.txt
       ```
@@ -80,7 +84,7 @@ A aplicação Python trata os dados recebidos do ESP32 e os armazena.
 
 A aplicação web exibe informações e permite a interação do usuário.
 
-1. **Configuração do Ambiente Node:**
+1. **Configuração da Aplicação:**
     - Navegue até o diretório do projeto React:
       ```bash
       cd BlueSpot
