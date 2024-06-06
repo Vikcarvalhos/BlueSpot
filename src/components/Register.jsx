@@ -12,6 +12,10 @@ function Register() {
 
     const { setUserId } = useContext(UserContext);
 
+    const handleClose = () => {
+        closeModal();
+    }
+
     const handleRegister = async () => {
         try {
             const existingUsersResponse = await axios.get('http://localhost:3001/users');
