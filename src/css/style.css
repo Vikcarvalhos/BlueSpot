@@ -94,6 +94,16 @@ main{
         border-radius: 1rem;
         cursor: pointer;
     }
+
+    .user-count {
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        width: 120%;
+        text-align: center;
+        padding: 2px 5px;
+        font-size: 0.8em;
+        border-radius: 10px;
+    }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1200px) {
@@ -183,6 +193,16 @@ main{
         border-radius: 1rem;
         cursor: pointer;
     }
+
+    .user-count {
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        width: 120%;
+        text-align: center;
+        padding: 2px 5px;
+        font-size: 0.8em;
+        border-radius: 10px;
+    }
 }
 
 @media screen and (min-width: 769px) and (max-width: 992px)  {
@@ -271,6 +291,16 @@ main{
         border: none;
         border-radius: 1rem;
         cursor: pointer;
+    }
+
+    .user-count {
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        width: 120%;
+        text-align: center;
+        padding: 2px 5px;
+        font-size: 0.8em;
+        border-radius: 10px;
     }
 }
 
@@ -362,6 +392,16 @@ main{
         border-radius: 1rem;
         cursor: pointer;
     }
+
+    .user-count {
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        width: 120%;
+        text-align: center;
+        padding: 2px 5px;
+        font-size: 0.8em;
+        border-radius: 10px;
+    }
 }
 
 @media (max-width: 576px) {
@@ -451,6 +491,18 @@ main{
         border: none;
         border-radius: 1rem;
         cursor: pointer;
+    }
+
+    .user-count {
+        position: relative;
+        right: calc(50% - 0px);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        width: 200%;
+        text-align: center;
+        padding: 2px 5px;
+        font-size: 0.8em;
+        border-radius: 10px;
     }
     
 }

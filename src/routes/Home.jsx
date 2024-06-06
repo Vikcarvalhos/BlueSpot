@@ -201,17 +201,21 @@ function Home(){
                         height: `${spotSize}px`,
                         cursor: 'pointer'
                     };
-                        return (
+                    return (
+                        <div key={index} style={spotStyle}>
                             <img 
-                                key={index} 
                                 src={spot} 
                                 alt='spot' 
-                                style={spotStyle} 
                                 onClick={(e) => {e.stopPropagation(); handleSpotClick(item);}}
                                 onTouchEnd={(e) => {e.stopPropagation(); handleSpotClick(item);}}
+                                style={{width: '100%', height: '100%'}}
                             />
-                        )
-                    })}
+                            <div className='user-count'>
+                                {item.users.length}
+                            </div>
+                        </div>
+                    )
+                })}
                 </MapInteractionCSS>
             </div>
             {modalOpen && (
