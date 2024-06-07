@@ -105,3 +105,8 @@ A aplicação web exibe informações e permite a interação do usuário.
       ```
 
 A aplicação estará disponível em `http://localhost:3000`.
+
+## Colaboradores:
+- João Viktor Carvalho de Souza - 552613
+- Diana Letícia de Souza Inocencio - 553562
+
